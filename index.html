@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Convert Mathematics Equations to Latex </title>
+
+  <!-- Load MathLive for natural math input -->
+  <script src="https://unpkg.com/mathlive"></script>
+
+  <!-- Load MathJax for pretty rendering (optional here) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+
+    math-field {
+      width: 100%;
+      min-height: 50px;
+      font-size: 1.5em;
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      font-size: 1.5em;
+      min-height: 60px;
+    }
+
+    .latex-display {
+      color: #555;
+      margin-top: 10px;
+      font-family: monospace;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      background-color: #0066cc;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0050a0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Convert Mathematics Equations to Latex</h1>
+  <p>Click on the keyboard on the right hand side and type your math below (e.g., <code>x^2 + y^2 = z^2</code>):</p>
+
+  <!-- MathLive input field -->
+  <math-field id="mathInput" virtual-keyboard-mode="onfocus"></math-field>
+
+  <button onclick="renderMath()">Render Equation</button>
+
+  <h2>Formatted Output:</h2>
+  <div id="output"></div>
+
+  <div class="latex-display">
+    <strong>LaTeX Code:</strong> <span id="latexCode"></span>
+  </div>
+
+  <script>
+    function renderMath() {
+      const mathField = document.getElementById("mathInput");
+      const latex = mathField.value;
+
+      // Show rendered output
+      document.getElementById("output").innerHTML = `\\[ ${latex} \\]`;
+      MathJax.typesetPromise();
+
+      // Show LaTeX code (optional)
+      document.getElementById("latexCode").textContent = latex;
+    }
+  </script>
+</body>
+</html>
